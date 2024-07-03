@@ -1,4 +1,5 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   ModalHeader,
   ModalContent,
@@ -27,20 +28,29 @@ function handle(state, action) {
   }
 }
 
-function SignUp({ children, triggerText, signInButtonText }) {
+function SignUp({ open, onClose, triggerText, signInButtonText }) {
   const [state, dispatch] = useReducer(handle, {
     closeOnEscape: true,
     closeOnDimmerClick: true,
-    open: false,
+    open: open,
     dimmer: undefined,
   });
-  const { open, closeOnEscape, closeOnDimmerClick } = state;
+
+  const { closeOnEscape, closeOnDimmerClick } = state;
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+
+  useEffect(() => {
+    if (open) {
+      dispatch({ type: 'OPEN_MODAL' });
+    } else {
+      dispatch({ type: 'CLOSE_MODAL' });
+    }
+  }, [open]);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -58,7 +68,23 @@ function SignUp({ children, triggerText, signInButtonText }) {
     setEmail('');
     setPassword('');
     setConfirmPass('');
-    dispatch({ type: 'CLOSE_MODAL' });
+    onClose();
+  };
+
+  const handleSignUp = async () => {
+    const userRequest = {
+      username,
+      email,
+      password
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8080/api/register', userRequest);
+      console.log('User registered:', response.data);
+      handleModalClose();
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
 
   return (
@@ -67,10 +93,9 @@ function SignUp({ children, triggerText, signInButtonText }) {
         <Modal
           closeOnEscape={closeOnEscape}
           closeOnDimmerClick={closeOnDimmerClick}
-          open={open}
+          open={state.open}
           onOpen={() => dispatch({ type: 'OPEN_MODAL' })}
           onClose={handleModalClose}
-          trigger={React.isValidElement(children) ? React.cloneElement(children, { onClick: () => dispatch({ type: 'OPEN_MODAL' }) }) : children}
         >
           <ModalHeader>{triggerText}</ModalHeader>
           <ModalContent>
@@ -110,7 +135,6 @@ function SignUp({ children, triggerText, signInButtonText }) {
               placeholder='confirm password'
               value={confirmPass}
               onChange={(e) => setConfirmPass(e.target.value)}
-              className={isPasswordDontMatch ? 'password-mismatch' : ''}
               icon={
                 <Icon
                   name={confirmPasswordVisible ? 'eye slash' : 'eye'}
@@ -119,11 +143,10 @@ function SignUp({ children, triggerText, signInButtonText }) {
                 />
               }
             />
-            {isPasswordDontMatch && <p style={{ color: 'red' }}>Passwords don't match</p>}
           </ModalContent>
           <ModalActions>
             <Button
-              onClick={handleModalClose}
+              onClick={handleSignUp}
               positive
               disabled={isSignUpDisabled}
             >
