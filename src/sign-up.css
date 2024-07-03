@@ -1,0 +1,43 @@
+.ui.modal{
+    max-width: 350px;
+}
+p {
+    margin: 0 0 0em;
+    line-height: 2;
+    text-align: justify;
+    margin-left: 10%;
+}
+.ui.modal>.actions {
+    background: #f9fafb;
+    padding: 1rem 1rem;
+    border-top: 1px solid rgba(34, 36, 38, .15);
+    text-align: center;
+}
+.ui.positive.button {
+    box-shadow: 0 0 0 0 rgba(34, 36, 38, .15) inset;
+    width: 50%;
+    border-radius: 25px;
+}
+.ui.modal>.content {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 1.5rem;
+    background: #fff;
+    text-align: center;
+}
+.ui.input {
+    width: 80%;
+    position: relative;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-flex;
+    color: rgba(0, 0, 0, .87);
+}
+.ui.modal .actions>.button {
+    color: white;
+    margin-left: .75em;
+    background-color: black;
+}
+  

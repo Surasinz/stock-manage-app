@@ -1,38 +1,92 @@
-.App {
+/* App.css */
+.hero-section {
+  position: relative;
+  height: 92.3vh;
+  background-image: url('./STOCK-2023.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1000px;
+  transform: translate(-50%, -50%);
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.overlay h1.display-4 {
+    border-radius: 40px;
+    background-color: black;
+    padding: 10px;
+    font-size: 3rem;
+    color: #ffffff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-light {
+  background-color: #f8f9fa;
+  color: #000000;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.btn-lg {
+  padding: 10px 20px;
+  font-size: 1.5rem;
+}
+
+.ui.clearing.segment {
+  background-color: #000000;
+  margin-bottom: 0;
+}
+
+.ui.white.button {
+  width: 15em;
+}
+
+.ui.black.button {
+  width: 15em;
+}
+.ui.segment{
+  padding: 0.5em 0.5em;
+}
+h3.ui.header {
+  color: white;
+  font-size: 1.5rem;
+}
+.ui.basic.button, .ui.basic.buttons .button {
+  background: transparent none !important;
+  color: rgb(255 255 255 / 60%) !important;
+  font-weight: 400;
+  border-radius: .28571429rem;
+  text-transform: none;
+  text-shadow: none !important;
+  box-shadow: 0 0 0 1px rgba(34, 36, 38, .15) inset;
+}.ui.buttons .or:before {
+  position: absolute;
+  text-align: center;
+  border-radius: 500rem;
+  content: 'or';
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  text-shadow: none;
+  margin-top: -.89285714em;
+  margin-left: -.89285714em;
+  width: 1.78571429em;
+  height: 1.78571429em;
+  line-height: 1.78571429em;
+  color: rgba(0, 0, 0, 100);
+  font-style: normal;
+  font-weight: 700;
+  box-shadow: 0 0 0 1px transparent inset;
+}
+.ui.buttons .button:last-child {
+  border-radius: 20px;
 }
